@@ -1,0 +1,8 @@
+{
+    "common": {},
+    "screen.users": {
+        "roles.header": "es:User Types",
+        "users.header": "es:{{role}} Users"
+    },
+    "component": {}
+}
