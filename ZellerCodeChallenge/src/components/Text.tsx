@@ -2,6 +2,7 @@ import { Text as RNText, StyleProp, TextStyle } from 'react-native'
 import React, { ReactNode } from 'react'
 import { typography } from '../typography/typography'
 import { t } from 'i18next'
+import { useTheme } from 'contexts/ThemeContext'
 
 type Props = {
     type?: "title" | "section" | "body" | "secondary" | "caption"
@@ -14,7 +15,10 @@ const Text = (props: Props) => {
 
     const derivedChildren = typeof children === 'string' ? t(children) : children
 
-    const defaultStyle = typography[type]
+    const { theme } = useTheme()
+
+    const defaultStyle = { ...typography[type], color: theme.colors.text }
+
 
     const textProps = {
         ...props,

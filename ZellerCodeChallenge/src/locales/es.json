@@ -1,5 +1,7 @@
 {
-    "common": {},
+    "common": {
+        "error.message": "es:Something went wrong."
+    },
     "screen.users": {
         "roles.header": "es:User Types",
         "users.header": "es:{{role}} Users"

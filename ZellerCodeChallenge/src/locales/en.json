@@ -1,8 +1,11 @@
 {
-    "common": {},
+    "common": {
+        "error.message": "Something went wrong."
+    },
     "screen.users": {
         "roles.header": "User Types",
-        "users.header": "{{role}} Users"
+        "users.header": "{{role}} Users",
+        "users.nomatchingdata": "No matching users found"
     },
     "component": {}
 }

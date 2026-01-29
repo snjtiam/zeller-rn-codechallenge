@@ -7,7 +7,7 @@ export const lightTheme: Theme = {
         background: "#FFFFFF",
         surface: "#E8F2FB",
         text: "#414242",
-        textSecondary: "#414242",
+        textSecondary: "#8E8E93",
         muted: "#8E8E93",
         border: "#F2F4F8",
     }

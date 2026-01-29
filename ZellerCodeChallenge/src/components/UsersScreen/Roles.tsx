@@ -57,13 +57,12 @@ const useStyles = (isRoleSelected?: boolean) => {
 
     return StyleSheet.create({
         contentContainer: {
-            paddingVertical: 20
         },
         containerItem: {
             flexDirection: 'row',
+            height: 50,
             alignItems: 'center',
             paddingHorizontal: 8,
-            paddingVertical: 16,
             marginVertical: 4,
             borderRadius: 8,
             backgroundColor: isRoleSelected ? theme.colors.surface : 'white'

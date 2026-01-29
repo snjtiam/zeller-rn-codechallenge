@@ -26,7 +26,7 @@ export type RadioButtonProps = {
     testID?: string;
 };
 
-const RadioButton: React.FC<RadioButtonProps> = ({
+const RadioButton = ({
     label,
     selected,
     onPress = () => { },
@@ -36,7 +36,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     style,
     labelStyle,
     testID,
-}) => {
+}: RadioButtonProps) => {
     const outerRadius = size / 2;
     const innerSize = Math.round(size * 0.5);
 
