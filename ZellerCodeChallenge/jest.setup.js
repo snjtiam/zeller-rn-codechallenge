@@ -55,21 +55,69 @@ jest.mock('react-native-localize', () => ({
   removeEventListener: jest.fn(),
 }));
 
-jest.mock('react-native/Libraries/Lists/VirtualizedList', () => {
-  const React = require('react');
-  const { View } = require('react-native');
-  const MockVirtualizedList = React.forwardRef((props, ref) => (
-    <View ref={ref}>{props.children}</View>
-  ));
-  return { default: MockVirtualizedList };
-});
+// jest.mock('react-native/Libraries/Lists/VirtualizedList', () => {
+//   const React = require('react');
+//   const { View } = require('react-native');
+//   const MockVirtualizedList = React.forwardRef((props, ref) => {
+//     const { data = [], renderItem, ListEmptyComponent } = props;
+//     let content = null;
+
+//     if (Array.isArray(data) && data.length > 0 && typeof renderItem === 'function') {
+//       content = data.map((item, index) => {
+//         const element = renderItem({ item, index });
+//         if (element === null || element === undefined) {
+//           return null;
+//         }
+//         const key =
+//           item && typeof item === 'object' && 'id' in item
+//             ? item.id
+//             : item && typeof item === 'object' && 'key' in item
+//             ? item.key
+//             : index;
+//         return React.createElement(React.Fragment, { key }, element);
+//       });
+//     } else if (ListEmptyComponent) {
+//       content =
+//         typeof ListEmptyComponent === 'function'
+//           ? React.createElement(ListEmptyComponent)
+//           : ListEmptyComponent;
+//     }
+
+//     return <View ref={ref}>{content}</View>;
+//   });
+//   return { default: MockVirtualizedList };
+// });
 
 jest.mock('@react-native/virtualized-lists/Lists/VirtualizedList', () => {
   const React = require('react');
   const { View } = require('react-native');
-  const MockVirtualizedList = React.forwardRef((props, ref) => (
-    <View ref={ref}>{props.children}</View>
-  ));
+  const MockVirtualizedList = React.forwardRef((props, ref) => {
+    const { data = [], renderItem, ListEmptyComponent } = props;
+    let content = null;
+
+    if (Array.isArray(data) && data.length > 0 && typeof renderItem === 'function') {
+      content = data.map((item, index) => {
+        const element = renderItem({ item, index });
+        if (element === null || element === undefined) {
+          return null;
+        }
+        const key =
+          item && typeof item === 'object' && 'id' in item
+            ? item.id
+            : item && typeof item === 'object' && 'key' in item
+              ? item.key
+              : index;
+        return React.createElement(React.Fragment, { key }, element);
+      });
+    } else if (ListEmptyComponent) {
+      content =
+        typeof ListEmptyComponent === 'function'
+          ? React.createElement(ListEmptyComponent)
+          : ListEmptyComponent;
+    }
+
+    return <View ref={ref}>{content}</View>;
+  });
   return { default: MockVirtualizedList };
 });
 
