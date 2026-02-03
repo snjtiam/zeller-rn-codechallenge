@@ -20,6 +20,8 @@ yarn start
 
 ###App Setup & Install
 
+## Step 0: Setup BASE_URL in .env file to point to your local server ip
+
 ## Step 1: Install node modules in ZellerCodeChallenge
 
 ```sh
