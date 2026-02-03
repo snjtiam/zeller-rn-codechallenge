@@ -33,5 +33,3 @@ yarn install
 ```sh
 yarn android
 ```
-
-## Step 3: Modify your app
