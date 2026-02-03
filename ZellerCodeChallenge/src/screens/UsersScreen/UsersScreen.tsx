@@ -7,7 +7,7 @@ import useStyles from './UserScreen.styles'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const UsersScreen = () => {
-  const { onPressRole, onRefresh, isLoading, selectedRole, rolesList, usersList } = useViewmodel()
+  const { onPressRole, onRefresh, onChangeSearchValue, isLoading, selectedRole, rolesList, usersList } = useViewmodel()
 
   const styles = useStyles()
 
@@ -15,7 +15,7 @@ const UsersScreen = () => {
     <SafeAreaView style={styles.safeAreaView}  >
       <View style={styles.container} >
         <Roles onPressRole={onPressRole} selectedRole={selectedRole} title="screen.users.roles.header" data={rolesList} />
-        <UsersList isLoading={isLoading} title={t('screen.users.users.header', { role: selectedRole })} data={usersList} onRefresh={onRefresh} />
+        <UsersList onChangeSearchValue={onChangeSearchValue} isLoading={isLoading} title={t('screen.users.users.header', { role: selectedRole })} data={usersList} onRefresh={onRefresh} />
       </View>
     </SafeAreaView>
   )

@@ -4,18 +4,20 @@ import { Customer } from 'types/customerType'
 import Text from 'components/Text'
 import { useTheme } from 'contexts/ThemeContext'
 import UserAvatar from './UserAvatar'
+import SearchInput from 'components/SearchInput'
 
 type Props = {
     isLoading: boolean
     data: Customer[]
     title: string
+    onRefresh: () => void
+    onSearch?: () => void
+    onChangeSearchValue: (value: string) => void
 }
 
 type PropsUserItem = {
     data: Customer
 }
-
-
 
 const UserListItem = ({ data }: PropsUserItem) => {
 
@@ -35,18 +37,19 @@ const UserListItem = ({ data }: PropsUserItem) => {
 
 
 const UsersList = (props: Props) => {
-    const { data, title, isLoading, onRefresh } = props
+    const { data, title, isLoading, onRefresh, onSearch, onChangeSearchValue } = props
     const styles = useStyles()
     const renderItem = ({ item }: { item: Customer }) => <UserListItem data={item} />
     return (
         <View>
             <Text type='title' >{title}</Text>
+            <SearchInput placeholder="Start typing to search user" onChangeText={onChangeSearchValue} onSearch={onSearch} />
             <FlatList
                 data={data}
                 renderItem={renderItem}
                 refreshing={isLoading}
                 onRefresh={onRefresh}
-                ListEmptyComponent={<Text type='secondary' style={styles.txtEmpty} >{'screen.users.users.nomatchingdata'}</Text>}
+                ListEmptyComponent={<Text type='secondary' style={styles.txtEmpty} >{isLoading ? "screen.users.users.fetchingdata" : 'screen.users.users.nomatchingdata'}</Text>}
             />
         </View>
 

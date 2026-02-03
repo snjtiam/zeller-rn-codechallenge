@@ -39,6 +39,7 @@ const Roles = (props: Props) => {
         <View>
             <Text type='title' >{title}</Text>
             <FlatList
+                keyboardShouldPersistTaps='handled'
                 contentContainerStyle={styles.contentContainer}
                 data={data}
                 renderItem={renderItem}

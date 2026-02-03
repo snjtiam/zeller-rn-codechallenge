@@ -5,7 +5,8 @@
     "screen.users": {
         "roles.header": "User Types",
         "users.header": "{{role}} Users",
-        "users.nomatchingdata": "No matching users found"
+        "users.nomatchingdata": "No matching users found",
+        "users.fetchingdata": "Fetching users..."
     },
     "component": {}
 }

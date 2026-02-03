@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Customer, Role } from "../../types/customerType";
 import CustomerApi from "apis/CustomerApi";
 import { ToastAndroid } from "react-native";
@@ -9,6 +9,7 @@ const useViewmodel = () => {
     const [rolesList, setRolesList] = useState<Array<string>>(Object.values(Role))
     const [usersList, setUsersList] = useState<Array<Customer>>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [searchKeyword, setSearchKeyword] = useState<string>("")
 
     const onPressRole = (value) => {
         setSelectedRole(value)
@@ -17,6 +18,7 @@ const useViewmodel = () => {
     const onRefresh = async () => {
         try {
             setIsLoading(true)
+            setUsersList([])
             const res = await CustomerApi.listCustomersByRole(selectedRole)
             setUsersList(res)
         } catch (error) {
@@ -29,17 +31,34 @@ const useViewmodel = () => {
 
     }
 
+    const onChangeSearchValue = (value) => {
+        setSearchKeyword(value)
+    }
+
+
+
+    const filteredUsers = useMemo(() => {
+        const keyword = searchKeyword.trim().toLowerCase()
+        return usersList.filter(user =>
+            user.name.toLowerCase().includes(keyword)
+        )
+
+    }, [usersList, searchKeyword])
+
+
+
     useEffect(() => {
         onRefresh()
     }, [selectedRole])
     return {
         isLoading,
         rolesList,
-        usersList,
+        usersList: filteredUsers,
         selectedRole,
         setSelectedRole,
         onPressRole,
-        onRefresh
+        onRefresh,
+        onChangeSearchValue,
     }
 };
 

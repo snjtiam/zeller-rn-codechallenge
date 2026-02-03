@@ -2,15 +2,17 @@ import { gqlClient } from "apis/client";
 import { listZellerCustomersByRoleQuery, listZellerCustomersQuery } from "apis/queries";
 import { Customer, Role } from "types/customerType";
 import { listZellerCustomers } from "../../mock-data/listZellerCustomers";
+import Config from "react-native-config";
 
 class CustomerApi {
-
-
   async listCustomersByRole(role: Role): Promise<Customer[]> {
 
     try {
+      if (!Config.BASE_URL) {
+        throw new Error('BASE_URL is not set');
+      }
 
-      const res = await fetch('http://192.168.1.3:9002/graphql', {
+      const res = await fetch(Config.BASE_URL, {
         method: 'POST',
         body: JSON.stringify({ query: listZellerCustomersQuery, }),
         headers: {
