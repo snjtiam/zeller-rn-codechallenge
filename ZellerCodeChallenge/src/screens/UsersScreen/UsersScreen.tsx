@@ -12,7 +12,7 @@ const UsersScreen = () => {
   const styles = useStyles()
 
   return (
-    <SafeAreaView style={styles.safeAreaView}  >
+    <SafeAreaView style={styles.safeAreaView} edges={['right', 'top', 'left']} >
       <View style={styles.container} >
         <Roles onPressRole={onPressRole} selectedRole={selectedRole} title="screen.users.roles.header" data={rolesList} />
         <UsersList onChangeSearchValue={onChangeSearchValue} isLoading={isLoading} title={t('screen.users.users.header', { role: selectedRole })} data={usersList} onRefresh={onRefresh} />

@@ -11,7 +11,7 @@ import ErrorFallbackScreen from 'screens/ErrorFallbackScreen/ErrorFallbackScreen
 configureAmplify()
 function App() {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider  >
       <ThemeProvider>
         <ErrorBoundary FallbackComponent={ErrorFallbackScreen} >
           <RootStack />
